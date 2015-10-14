@@ -7,5 +7,5 @@ npm run build
 
 cd dist && zip -x .DS_Store -r leaflet.zip . && cd ..
 
-# cp build/*.json ./
+cp build/*.json ./
 tin -v $VERSION
