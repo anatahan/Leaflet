@@ -22,20 +22,25 @@ env:
 after_success:
   - npm run release
   - NAME=$TRAVIS_BRANCH
-  - "[[ $TRAVIS_PULL_REQUEST != 'false' ]] && NAME=$TRAVIS_PULL_REQUEST"
-  - "[[ -n $TRAVIS_TAG ]] && NAME=$TRAVIS_TAG"
+  - '[[ $TRAVIS_PULL_REQUEST != ''false'' ]] && NAME=$TRAVIS_PULL_REQUEST'
+  - '[[ -n $TRAVIS_TAG ]] && NAME=$TRAVIS_TAG'
 deploy:
-  provider: releases
-  api_key:
-    secure: JrqxB0Ed8TO2Aoy3Rcp7JS3O799b7qDKEYvdekEgCVmUyRa9Gd4/cSpDbUdlTSnlBS42pqIImar9V5tTT1A6ygcDZBKJnAdfUGCNxz5JDiVqd8HwHbqA2/m/jEUt34+i5yzVLZo4RR7Zvyiq0wPSBBvP9EvphBhrx6vHlb0M2Vg=
-  file:
-    - "dist/leaflet.js"
-    - "dist/leaflet-src.js"
-    - "bower.json"
-    - "component.json"
-  skip_cleanup: true
-  on:
-    tags: true
-    repo: Leaflet/Leaflet
-  after_deploy:
-    - npm publish --tag beta
+  - provider: releases
+    api_key:
+      secure: JrqxB0Ed8TO2Aoy3Rcp7JS3O799b7qDKEYvdekEgCVmUyRa9Gd4/cSpDbUdlTSnlBS42pqIImar9V5tTT1A6ygcDZBKJnAdfUGCNxz5JDiVqd8HwHbqA2/m/jEUt34+i5yzVLZo4RR7Zvyiq0wPSBBvP9EvphBhrx6vHlb0M2Vg=
+    file:
+      - "dist/leaflet.js"
+      - "dist/leaflet-src.js"
+      - "bower.json"
+      - "component.json"
+    skip_cleanup: true
+    on:
+      tags: true
+      repo: Leaflet/Leaflet
+  - provider: npm
+    email: agafonkin@gmail.com
+    api_key:
+      secure: D0Shd1IfqLGQZMg52kJAnfxVOfADlBRxcjPdGekoBOc35b2LA1Lqt3AA8LE2Uo+sb00YYlb10wvkL+bOXmrDUbJc7qpdJn3Wx3rdxT+7j1hrd8lnwkwJcrKd2UV/S606Vfc9V+XAHB57ZjNZsIeJsxp9ILSWwSjtJRep/2Xsaaw=
+    on:
+      tags: true
+      repo: Leaflet/Leaflet
